@@ -47,10 +47,10 @@ class HexEditor:
         if self.get_byte_count(line_with_byte) - 1 >= byte_pos:
             data_to_change = self.get_data_ret_str(line_with_byte)
             
-            new_data = data_to_change[:byte_pos * 2] + hex(value)[2:].upper() + data_to_change[byte_pos * 2 + 2:]
+            new_data = data_to_change[:byte_pos * 2] + format(value, '02x').upper() + data_to_change[byte_pos * 2 + 2:]
             
             modified_record = line_with_byte[:9] + new_data
-            modified_record += self.calc_checksum(modified_record)[2:].upper()
+            modified_record += self.calc_checksum(modified_record).upper()
             
 #             print line_with_byte
             
@@ -152,4 +152,4 @@ class HexEditor:
         for i in range(0, byte_count):
             bytes_to_checksum.append(int(hex_line[9 + i * 2:11 + i * 2], 16))
             
-        return hex(0x100 - (sum(bytes_to_checksum) & 0xff))
+        return format(0x100 - (sum(bytes_to_checksum) & 0xff), '02x')
