@@ -152,4 +152,4 @@ class HexEditor:
         for i in range(0, byte_count):
             bytes_to_checksum.append(int(hex_line[9 + i * 2:11 + i * 2], 16))
             
-        return format(0x100 - (sum(bytes_to_checksum) & 0xff), '02x')
+        return format((0x100 - (sum(bytes_to_checksum)) & 0xff), '02x')
