@@ -1,0 +1,3 @@
+*.hex
+dist
+__pycache__
